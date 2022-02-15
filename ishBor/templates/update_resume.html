@@ -1,0 +1,68 @@
+{% extends 'ishBeruvchi.html' %}
+{% block dashboard %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 my-3">
+            <div class="card shadow py-2 ">
+                <h2 class="text-center">Resumeni <span class="text-primary">Tahrirlash</span></h2>
+            </div>
+        </div>
+        <div class="col-md-10">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="" class="form-label">Sohalar</label>
+                    <select name="cats" id="" class="form-select">
+                        {% for cat in cats %}
+                        {% if cat.id == data.category.id %}
+                        <option value="{{cat.id}}" selected>{{cat.name}}</option>
+                        {% else %}
+                        <option value="{{cat.id}}">{{cat.name}}</option>
+                        {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="" class="form-label">Yosh</label>
+                    <input type="number" placeholder="Yoshinginzi kiriting" name="age" value="{{data.age}}" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="" class="form-label">Kasblar haqida</label>
+                    <textarea name="job" cols="30" rows="3" class="form-control">{{data.title |safe}}</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="" class="form-label">Batafsil Ma'lumot bering</label>
+                    <textarea name="about" cols="30" rows="4" class="form-control">{{data.about |safe}}</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="" class="form-label">Tajriba</label>
+                    <input type="number" placeholder="Necha yillik tajribangiz bor" name="experience" value="{{data.experience}}" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="" class="form-label">Ish haqi</label>
+                    <input type="text" placeholder="Kelishilgan holda yoki aniq summa kiriting" name="salary" value="{{data.salary}}" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="" class="form-label">Telefon raqam</label>
+                    <input type="text" class="form-control" name="phone" placeholder="Telefon raqam yozing"
+                           pattern="[0-9]{9}" value="{{data.phone}}" required><br>
+                </div>
+                <div class="form-group">
+                    <label for="" class="form-label">Manzil</label>
+                    <textarea name="address" cols="30" rows="4" class="form-control">{{data.address |safe}}</textarea>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Saqlash" class="btn btn-success mt-2">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% if status %}
+<script>
+    alert("{{status}}")
+    window.location="/employer"
+</script>
+{% endif %}
+{% endblock %}

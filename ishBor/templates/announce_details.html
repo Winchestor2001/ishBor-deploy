@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block mycontent %}
+<div class="container mt-5">
+    <div class="row" style="padding-bottom:2.5rem;">
+        <div class="col-12 col-lg-10 single-job-items mb-4 px-3">
+            <div class="job-items border p-4 ">
+              <div class="job-tittle">
+                <a href="job_details.html" class="text-decoration-none text-dark">
+                  <div class="d-flex justify-content-between">
+                    <h4>{{info.category}}</h4>
+                    {% if info.condition == 'Yakunlandi' %}
+                    <h4 class="text-danger"><s>{{info.condition}}</s></h4>
+                    {% else %}
+                    <h4 class="text-success">{{info.condition}}</h4>
+                    {% endif %}
+                  </div>
+                </a>
+                <p>
+                  {{info.title |safe}}
+                </p>
+                  <p>{{info.body |safe}}</p>
+                <div class="d-flex justify-content-between">
+                  <ul>
+                    <li>Murojaat uchun : </li>
+                    <li><i class="fas fa-phone me-2"></i>Telefon raqam: <span>{{info.phone}}</span></li>
+                    <li><i class="fas fa-map-marker-alt me-2"></i>Manzil : <span>{{info.address}}</span></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="items-link d-flex justify-content-between align-items-center">
+                <span class="oclock">{{info.created_at}}</span>
+                <a href="{% url 'index-page'%}" class="btn h-25 btn-success">Ortga Qaytish</a>
+              </div>
+            </div>
+          </div>
+    </div>
+</div>
+{% endblock %}

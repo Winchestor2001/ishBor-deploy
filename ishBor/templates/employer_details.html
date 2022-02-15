@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block mycontent %}
+<div class="container">
+    <div class="row">
+         <div class="col-12 col-lg-10 single-job-items mb-4 mt-5 px-3">
+            <div class="job-items border p-4 ">
+              <div class="job-tittle">
+                <a href="job_details.html" class="text-decoration-none text-dark">
+                  <div class="d-flex justify-content-between">
+                    <h3>{{info.category}}</h3>
+                  </div>
+                </a>
+                <h5>
+                  <span class="text-warning">Kim: </span>{{info.user.first_name}} {{info.user.last_name}}
+                </h5>
+                <h5>
+                  <span class="text-warning">Yosh: </span>{{info.age}}
+                </h5>
+                <h5>
+                  <span class="text-warning">Tajriba: </span>{{info.experience}} yil
+                </h5>
+                <h5>
+                  {{info.about |safe}}
+                </h5>
+                <h5>
+                  <span class="text-warning">Ish haqqi: </span>{{info.salary}} so'm
+                </h5>
+                <div class="d-flex justify-content-between">
+                  <ul>
+                    <li>Murojaat uchun : </li>
+                    <li><i class="fas fa-phone me-2"></i>Telefon raqam: <span>{{info.phone}}</span></li>
+                    <li><i class="fas fa-map-marker-alt me-2"></i>Manzil : <span>{{info.address |safe}}</span></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="items-link d-flex justify-content-between align-items-center">
+                <span class="oclock">{{info.created_at}}</span>
+                <a href="{% url 'index-page' %}" class="btn h-25 btn-success">Ortga qaytish</a>
+              </div>
+            </div>
+          </div>
+    </div>
+</div>
+{% endblock %}

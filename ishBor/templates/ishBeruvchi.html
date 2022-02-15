@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NamSoft</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="owl.carousel offline/assets/owl.carousel.css">
+</head>
+
+<body>
+
+<section class="container-fluid d-flex flex-column" style="min-height:100vh !important;overflow-x: hidden;">
+        <section id="header" class="flex-fill">
+          <nav id="nav" class="navbar navbar-expand-lg bg-dark navbar-dark">
+            <div class="container">
+              <a class="navbar-brand" href="#"><i class="fas fa-briefcase text-warning me-1"></i>ishBor</a>
+              <div class="menu-btn  navbar-toggler border-0 " type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <div class="menu-btn-burger"></div>
+              </div>
+              <div class="collapse div navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 col justify-content-end text-capitalize">
+                  <li class="nav-item py-lg-4 px-lg-3">
+                    <a class="text-decoration-none text-center text-white fs-5"
+                     href="{% url 'viewProfile' %}">
+                   Xush kelibsiz,
+                        <i class="fas fa-user me-2"></i><span class="text-warning fw-bold">{{user.first_name}} {{user.last_name}}</span>
+                  </a>
+                  </li>
+
+                </ul>
+              </div>
+            </div>
+          </nav>
+          <div class="container-fluid">
+              <div class="row">
+                  <div class="col-md-4">
+                      <div class="card shadow">
+                          <img src="{% static 'images/profile.jpg' %}"
+                               alt="" width="150px" height="150px" class="d-block mx-auto mt-2 rounded-circle">
+                          <ul class="navbar-nav px-5 pb-5">
+                          <li class="navbar-item">
+                              <a href="{% url 'viewProfile' %}" class="nav-link fs-4"><i class="fa-solid fa-eye me-2 text-success"></i>Profilni ko'rish</a>
+                          </li>
+                          <li class="navbar-item">
+                              <a href="{% url 'advertisement' %}" class="nav-link fs-4"><i class="fa-solid fa-bullhorn me-2 text-danger"></i>E'lon Berish</a>
+                          </li>
+                          <li class="navbar-item">
+                              <a href="{% url 'myAnnouncement' %}" class="nav-link fs-4"><i class="fa-solid fa-bullhorn me-2 text-info"></i>E'lonlarim</a>
+                          </li>
+                          <li class="navbar-item">
+                              <a href="{% url 'employer' %}" class="nav-link fs-4"><i class="far fa-file me-2 text-primary"></i>Resume</a>
+                          </li>
+                          <li class="navbar-item">
+                              <a href="{% url 'change_password' %}" class="nav-link fs-4"><i class="fa fa-lock text-warning me-2"></i>Parolni yangilash</a>
+                          </li>
+                          <li class="navbar-item">
+                              <a href="{% url 'user_logout'%}" class="nav-link fs-4"><i class="fas fa-sign-out-alt me-2 text-danger"></i>Profildan chiqish</a>
+                          </li>
+                      </ul>
+                      </div>
+                  </div>
+                  <div class="col-md-8">
+                      {% block dashboard %}
+                      {% endblock %}
+                  </div>
+              </div>
+          </div>
+        <section class="footer mt-5">
+          <div class="footerCol text-center py-3  text-white">
+            <p class="mt-3"> Mualliflik huquqi © 2021 Barcha huquqlar himoyalangan | Loyiha <span class="text-warning">NITS Team</span> jamoasi tomonidan yaratilgan.</p>
+          </div>
+        </section>
+    <!-- <div class="scrolTop">
+      <i class="fas fa-angle-up fa-3x" style="color: white;"></i>
+
+    </div> -->
+  </section>
+</section>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <script src="{% static 'js/jQuery.js' %}"></script>
+  <script src="https://w3hubs.com/JqueryNumberScrollingWithBootstrap/bootstrap.min.js"></script>
+  <script src="https://w3hubs.com/JqueryNumberScrollingWithBootstrap/numscroller-1.0.js"></script>
+  <script src="{% static 'owl.carousel offline/owl.carousel.js' %}"></script>
+  <script src="{% static 'js/app.js'%}"></script>
+
+</body>
+
+</html>

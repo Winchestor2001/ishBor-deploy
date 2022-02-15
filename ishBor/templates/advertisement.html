@@ -1,0 +1,47 @@
+{% extends 'ishBeruvchi.html'%}
+{% block dashboard %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-9 mx-auto bg-light my-5 p-4">
+            <form method="post">
+                {% csrf_token %}
+                <h1 class="text-center">E'lon berish</h1>
+                <hr>
+                <div class="form-group">
+                    <label for="" class="form-label">Sohani tanlang</label>
+                    <select name="field" id="" class="form-select">
+                        {% for cat in data %}
+                        <option value="{{cat.id}}">{{cat.name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="" class="form-label">Sarlavha</label>
+                    <textarea name="title" placeholder="Ish haqida qisqacha ma'lumot bering"  cols="30" rows="2" class="form-control" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="" class="form-label">Batafsil Ma'lumot</label>
+                    <textarea name="text" placeholder="Ish haqida batafsil ma'lumot bering"  cols="30" rows="4" class="form-control" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="" class="form-label">Telefon Nomer</label>
+                    <input type="text" pattern="[0-9]{9}" placeholder="Telefon raqamingizni kiriting"
+                           class="form-control" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="" class="form-label">Manzil</label>
+                    <textarea name="address" placeholder="Manzilingizni to'liq kiriting"  cols="30" rows="2" class="form-control" required></textarea>
+                </div>
+                <div class="form-group mt-3">
+                    <input type="submit" class="btn btn-warning btn-lg" value="Saqlash">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% if status %}
+<script>
+    window.location='/viewProfile'
+</script>
+{% endif %}
+{% endblock %}

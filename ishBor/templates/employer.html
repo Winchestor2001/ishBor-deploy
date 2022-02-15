@@ -1,0 +1,88 @@
+{% extends 'ishBeruvchi.html'%}
+{% block dashboard %}
+<div class="container">
+    <div class="row">
+        {% if employer %}
+        <div class="col-md-12 mx-auto bg-light my-5 p-4">
+            <table class="table ">
+                <thead>
+                    <th>F.I.O</th>
+                    <th>Yosh</th>
+                    <th>Tajriba</th>
+                    <th>Haqida</th>
+                    <th></th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{user.first_name}} {{user.last_name}}</td>
+                        <td>{{employer.age}}</td>
+                        <td>{{employer.experience}}</td>
+                        <td>{{employer.about |safe |truncatechars:150}}</td>
+                        <td><a href="{% url 'update_resume' %}?resumeId={{employer.id}}" class="btn btn-warning">O'zgartirish</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        {% else %}
+        <div class="col-md-9 mx-auto bg-light my-5 p-4">
+            <form method="post">
+                {% csrf_token %}
+                <h1 style="text-indent:30px;">Resyume Qoldirish</h1>
+                <hr>
+                <div class="form-group">
+                    <label for="" class="form-label">Sohani tanlang</label>
+                    <select name="field" id="" class="form-select">
+                        {% for cat in data %}
+                        <option value="{{cat.id}}">{{cat.name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="" class="form-label">Yosh</label>
+                    <input type="text" name="age" placeholder="yoshingizni kiriting" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="" class="form-label">Kasblar</label>
+                    <textarea name="job" placeholder="Qaysi kasblarni bilishiz haqida qisqacha yozing"
+                              cols="30" rows="4" class="form-control" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="" class="form-label">Batafsil Ma'lumot</label>
+                    <textarea name="about" placeholder="Qila olishiz mumkin bo'lgan ishlar haqida batafsil yozing"
+                              cols="30" rows="4" class="form-control" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="" class="form-label">Tajriba</label>
+                    <input type="text" name="experience"placeholder="Nech yillik tajribangiz borligini yozing"
+                           class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="" class="form-label">Ish haqi</label>
+                    <input type="text" name="salary"placeholder="Kelishilgan holda yoki bir kunlik ish haqqingizni kiriting"
+                           class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="" class="form-label">Telefon Nomer</label>
+                    <input type="text" pattern="[0-9]{9}" placeholder="Telefon raqamingizni kiriting"
+                           class="form-control" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="" class="form-label">Manzil</label>
+                    <textarea name="address" placeholder="Manzilingizni to'liq kiriting"  cols="30" rows="2" class="form-control" required></textarea>
+                </div>
+                <div class="form-group mt-3">
+                    <input type="submit" class="btn btn-warning btn-lg" value="Saqlash">
+                </div>
+            </form>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% if status %}
+<script>
+    window.location='/employer'
+</script>
+{% endif %}
+{% endblock %}

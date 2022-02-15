@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block  mycontent %}
+<section class="container-fluid">
+    <section class="SignUp">
+      <div class="container py-5">
+        <form class="signUpForm" method="post">
+            {% csrf_token %}
+          <div class="row signUprow py-5">
+            <div class="col-12 text-center">
+              <h2>Ro'yxatdan o'tish formasi</h2>
+            </div>
+            <div class="col-12 col-lg-6 text-center px-5 pt-5 ">
+                <div class="input">
+                  <input type="text" class="signUpInput" placeholder="Ismingizni kiriting" name="fname" required><br>
+                  <i class="fas fa-user"></i>
+                </div>
+                <div class="">
+                        <div id="result"></div>
+                </div>
+                <div class="input">
+                  <input type="text" class="signUpInput" name="username" placeholder="Telefon raqamingizni kiriting"
+                         id="username"   pattern="[0-9]{9}" onkeyup="checkuser()" required><br>
+                  <i class="fas fa-phone-alt"></i>
+                </div>
+                 <div class="">
+                        <div id="resultpwd"></div>
+                 </div>
+                <div class="input">
+                  <input type="password" class="signUpInput" placeholder="Parolingizni kiriting" id="password1" onkeyup="checkuser()" name="password" required><br>
+                  <i class="fas fa-lock"></i>
+                </div>
+            </div>
+            <div class="col-12 col-lg-6 text-center px-5 pt-0 pt-lg-5">
+                <div class="input">
+                  <input type="text" class="signUpInput" placeholder="Familyangizni kiriting" name="lname" required><br>
+                  <i class="fas fa-user"></i>
+                </div>
+                <div class="input">
+                  <select class="form-select  signUpInput"aria-label="Default select example" name="gender" required>
+                    <option value="Erkak">Erkak</option>
+                    <option value="Ayol">Ayol</option>
+                  </select>
+                </div>
+                <div class="input">
+                  <input type="password" class="signUpInput" placeholder="Tasdiqlovchi Parolingizni kiriting" id="password2"
+                         onkeyup="checkuser()" name="password2" required><br>
+                  <i class="fas fa-lock"></i>
+                </div>
+                <button class="hvr-btn btn-content signUpBtn" id="submitbtn">Ro'yxatdan o'tish</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+
+  </section>
+
+<script>
+    function checkuser() {
+        let un = document.getElementById('username').value;
+        let pwd1 = document.getElementById('password1').value;
+        let pwd2 = document.getElementById('password2').value;
+        $.ajax({
+            url: "{% url 'check_user' %}",
+            type: 'get',
+            data: { usern: un },
+            success: function (data) {
+
+                if (data == 'Exists') {
+                    $('#result').html('Bu foydalanuchi avval ro`yxatdan o`tgan').addClass('text-danger');
+                    $('#username').addClass('alert alert-danger');
+                    $('#submitbtn').attr('disabled', 'disabled');
+                } else if (pwd1 !== pwd2) {
+                    $('#resultpwd').html('Kiritilgan parol va tasdiqlochi parol bir xil emas').addClass('text-danger');
+                    $('#password1').addClass('alert alert-danger');
+                    $('#password2').addClass('alert alert-danger');
+                    $('#submitbtn').attr('disabled', 'disabled');
+                } else {
+                    $('#result').html('');
+                    $('#resultpwd').html('');
+                    $('#username').removeClass('alert alert-danger')
+                    $('#password1').removeClass('alert alert-danger');
+                    $('#password2').removeClass('alert alert-danger');
+                    $('#submitbtn').removeAttr('disabled')
+                }
+
+            }
+        })
+    }
+
+</script>
+{% if status %}
+<script>
+    alert('{{status}}');
+    window.location = '/'
+</script>
+{% endif %}
+{% endblock %}

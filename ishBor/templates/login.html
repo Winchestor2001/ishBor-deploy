@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block mycontent %}
+  <section class="container-fluid">
+    <section class="SignUp">
+      <div class="container py-5">
+        <form action="" class="signUpForm" method="post">
+            {% csrf_token %}
+          <div class="row signUprow justify-content-center py-5">
+            <div class="col-12 text-center">
+              <h2>Login va Parolingizni kiriting</h2>
+            </div>
+            <div class="col-12 col-md-10 col-lg-7 text-center p-5">
+                <div class="SignInInput">
+                  <input type="text" class="signIn" name="email" placeholder="Email"><br>
+                  <i class="fas fa-user"></i>
+                </div>
+                <div class="SignInInput">
+                  <input type="password" name="password" class="signIn" placeholder="Password"><br>
+                  <i class="fas fa-lock"></i>
+                </div>
+                <div class="SignInInput my-3">
+                  <input type="checkbox" class="me-0 me-md-1" id="checkbox">
+                  <label for="checkbox" class="signInText me-3">Eslab qolish</label>
+                  <span ><a href="">Parol esdan Chiqdimi</a></span><br>
+                  <button class="hvr-btn btn-content signInBtn w-50">Kirish</button>
+                </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+  </section>
+{% if status %}
+<script>
+    alert('{{status}}');
+    window.location = '/user_login'
+</script>
+{% endif %}
+{% endblock %}
